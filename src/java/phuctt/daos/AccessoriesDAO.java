@@ -95,10 +95,11 @@ public class AccessoriesDAO implements Serializable {
         try {
             conn = DBConnection.getConnection();
             
-            String sql = "DELETE FROM tbl_Accessories WHERE AccessoryID = ?";
+            String sql = "UPDATE tbl_Accessories SET isDelete = ? WHERE AccessoryID = ?";
             
             ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setBoolean(1, true);
+            ps.setString(2, id);
             
             check = ps.executeUpdate() > 0;
         } finally {
